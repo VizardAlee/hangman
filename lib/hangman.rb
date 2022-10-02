@@ -26,3 +26,11 @@ end
 
 p comp_choice(dic_array)
 
+# steps after here:
+# shouw the length of word chosen by either computer or man
+# restrict the player to the length of words
+# represent the word length with hyphens
+# any letter chosen, if it is in sync with the position of the chosen word whould appear
+# number of chances should'n exceed 5
+# if word is gotten before exhausting chances, declare winner
+# if word is not gotten and chances exhausted, declare loser
