@@ -24,8 +24,31 @@ def comp_choice(array)
   shuffler.sample
 end
 
-p comp_choice(dic_array)
+def word_length(word)
+  word.length
+end
 
+def restriction(word_length, string)
+  if word_length == string.length
+    true
+  else
+    "Word shouldn't exceed or be below #{word_length}. Thank you!"
+  end
+end
+
+def word_layout(word_length)
+  layout = []
+  while word_length.zero? == false
+    layout.push('_')
+    word_length -= 1
+  end
+  layout.join(' ')
+end
+
+p chosen = comp_choice(dic_array)
+p word_length = word_length(chosen)
+p restriction(word_length, 'string')
+puts word_layout(word_length)
 # steps after here:
 # shouw the length of word chosen by either computer or man
 # restrict the player to the length of words
@@ -34,3 +57,6 @@ p comp_choice(dic_array)
 # number of chances should'n exceed 5
 # if word is gotten before exhausting chances, declare winner
 # if word is not gotten and chances exhausted, declare loser
+
+
+
