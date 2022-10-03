@@ -63,7 +63,7 @@ array = chosen_words(dic_array)
 
 # determine winning
 def game(array)
-  p comp_choice = comp_choice(array)
+  comp_choice = comp_choice(array)
   word_length = word_length(comp_choice)
   dashes = word_layout(word_length)
   layout = splitting(dashes)
@@ -73,7 +73,7 @@ def game(array)
     puts'Guess a word!'
     move_count -= 1
     my_word = player_move.map { |word| word }
-    if my_word.all? == comp_choice.all?
+    if my_word == comp_choice
       puts "You win!"
       return
     end
@@ -92,6 +92,9 @@ def game(array)
       puts "Word length should not exceed of fall short of #{word_length}"
     end
     puts "You have #{move_count} moves to go!"
+    if move_count.zero?
+      puts "You lose! The word is \"#{comp_choice.join('')}\""
+    end
   end
 end
 
@@ -105,7 +108,7 @@ p game(array)
 # --shouw the length of word chosen by either computer or man
 # --restrict the player to the length of words
 # --represent the word length with hyphens
-# any letter chosen, if it is in sync with the position of the chosen word whould appear
-# number of chances should'n exceed 5
-# if word is gotten before exhausting chances, declare winner
-# if word is not gotten and chances exhausted, declare loser
+# --any letter chosen, if it is in sync with the position of the chosen word whould appear
+# ---number of chances should'n exceed 5
+# --if word is gotten before exhausting chances, declare winner
+# --if word is not gotten and chances exhausted, declare loser
