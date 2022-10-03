@@ -21,20 +21,21 @@ end
 def comp_choice(array)
   words = chosen_words(array)
   shuffler = randomize(words)
-  shuffler.sample
+  word = shuffler.sample
+  word.split('')
 end
 
-def word_length(word)
-  word.length
+def word_length(array)
+  array.length
 end
 
-def restriction(word_length, string)
-  if word_length == string.length
+def restriction(word_length, array)
+  if word_length == array.length
     true
-  else
-    "Word shouldn't exceed or be below #{word_length}. Thank you!"
   end
 end
+
+# restriction(5, ['string'])
 
 def word_layout(word_length)
   layout = []
@@ -45,18 +46,66 @@ def word_layout(word_length)
   layout.join(' ')
 end
 
-p chosen = comp_choice(dic_array)
-p word_length = word_length(chosen)
-p restriction(word_length, 'string')
-puts word_layout(word_length)
+def splitting(word)
+  word.split(' ')
+end
+
+def joining(split)
+  split.join('')
+end
+
+def player_move
+  move = gets.chomp
+  move.split('')
+end
+
+array = chosen_words(dic_array)
+
+# determine winning
+def game(array)
+  p comp_choice = comp_choice(array)
+  word_length = word_length(comp_choice)
+  dashes = word_layout(word_length)
+  layout = splitting(dashes)
+  move_count = 5
+  while move_count.zero? == false
+    puts layout.join(' ')
+    puts'Guess a word!'
+    move_count -= 1
+    my_word = player_move.map { |word| word }
+    if my_word.all? == comp_choice.all?
+      puts "You win!"
+      return
+    end
+
+    if restriction(word_length, my_word) == true
+      my_word.each_with_index do |letter, index|
+        comp_choice.each_with_index do |letter1, index1|
+          layout.each_with_index do |position, index2|
+            if letter == letter1 && index == index1 && index1 == index2
+              layout[index2] = letter
+            end
+          end
+        end
+      end
+    else
+      puts "Word length should not exceed of fall short of #{word_length}"
+    end
+    puts "You have #{move_count} moves to go!"
+  end
+end
+
+p game(array)
+
+# p chosen = comp_choice(dic_array)
+# p word_length = word_length(chosen)
+# p restriction(word_length, 'string')
+# puts word_layout(word_length)
 # steps after here:
-# shouw the length of word chosen by either computer or man
-# restrict the player to the length of words
-# represent the word length with hyphens
+# --shouw the length of word chosen by either computer or man
+# --restrict the player to the length of words
+# --represent the word length with hyphens
 # any letter chosen, if it is in sync with the position of the chosen word whould appear
 # number of chances should'n exceed 5
 # if word is gotten before exhausting chances, declare winner
 # if word is not gotten and chances exhausted, declare loser
-
-
-
